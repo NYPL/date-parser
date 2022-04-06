@@ -19,7 +19,7 @@ end
 
 def parse_dates(event)
   dates = JSON.parse(event['body'])['dates']
-  parsed_dates = dates.map { |date| Timetwister.parse(date) }
+  parsed_dates = dates.map { |date| { date => Timetwister.parse(date) } }
 
   create_response(200, { dates: parsed_dates })
 end
