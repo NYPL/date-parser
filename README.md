@@ -4,7 +4,7 @@ A simple lambda wrapping [Timetwister](https://github.com/alexduryee/timetwister
 
 ## Using DateParser
 
-- DateParser expects events in the form 
+DateParser expects events in the form 
 ```
 {
   "path": "/",
