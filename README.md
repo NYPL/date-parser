@@ -4,7 +4,8 @@ A simple lambda wrapping [Timetwister](https://github.com/alexduryee/timetwister
 
 ## Using DateParser
 
-- DateParser expects events in the form ```
+DateParser expects events in the form 
+```
 {
   "path": "/",
   "body": "{\"dates\":[\"Jun 1898 - [July 4 1900],Jun 1898 - [July 4 1901]\"]}"
@@ -30,4 +31,4 @@ where `dates` can be any array of date strings.
 
 ## Testing
 
-Invoke tests with `bundle exec rspec` (TODO)
+Invoke tests with `bundle exec rspec`
