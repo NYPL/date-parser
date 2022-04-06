@@ -4,7 +4,8 @@ A simple lambda wrapping [Timetwister](https://github.com/alexduryee/timetwister
 
 ## Using DateParser
 
-- DateParser expects events in the form ```
+- DateParser expects events in the form 
+```
 {
   "path": "/",
   "body": "{\"dates\":[\"Jun 1898 - [July 4 1900],Jun 1898 - [July 4 1901]\"]}"
