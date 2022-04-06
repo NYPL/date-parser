@@ -7,13 +7,11 @@ A simple lambda wrapping [Timetwister](https://github.com/alexduryee/timetwister
 - DateParser expects events in the form ```
 {
   "path": "/",
-  "queryStringParameters": {
-    "dates": "Jun 1898 - [July 4 1900],Jun 1898 - [July 4 1901]"
-  }
+  "body": "{\"dates\":[\"Jun 1898 - [July 4 1900],Jun 1898 - [July 4 1901]\"]}"
 }
 ```
 
-where `dates` can be any comma-delimited list of strings.
+where `dates` can be any array of date strings.
 
 ## Requirements
 

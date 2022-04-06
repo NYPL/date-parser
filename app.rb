@@ -1,5 +1,4 @@
 require 'timetwister'
-require 'cgi'
 require 'nypl_ruby_util'
 
 
@@ -11,11 +10,6 @@ end
 def handle_event(event:, context:)
   init
 
-  path = event['path']
-  if path.include? '/docs'
-    return swagger_docs
-  end
-
   begin
     parse_dates event
   rescue StandardError => e
@@ -24,17 +18,10 @@ def handle_event(event:, context:)
 end
 
 def parse_dates(event)
-  params = event['queryStringParameters']
-  dates = CGI.unescape(params['dates'])
-  parsed_dates = Timetwister.parse(dates)
+  dates = JSON.parse(event['body'])['dates']
+  parsed_dates = dates.map { |date| Timetwister.parse(date) }
 
   create_response(200, { dates: parsed_dates })
-end
-
-
-def swagger_docs
-  swagger_docs = JSON.parse(File.read('./swagger.json'))
-  create_response(200, swagger_docs)
 end
 
 def create_response(status_code = 200, body = nil)

@@ -1,6 +1,4 @@
 {
   "path": "/",
-  "queryStringParameters": {
-    "dates": "Jun 1898 - [July 4 1900],Jun 1898 - [July 4 1901]"
-  }
+  "body": "{\"dates\":[\"Jun 1898 - [July 4 1900],Jun 1898 - [July 4 1901]\"]}"
 }
