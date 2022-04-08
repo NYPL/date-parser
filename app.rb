@@ -1,27 +1,36 @@
 require 'timetwister'
 require 'nypl_ruby_util'
 
-
 def init
-  $logger = NYPLRubyUtil::NyplLogFormatter.new($stdout, level: ENV['LOG_LEVEL'])
-  $logger.debug 'Initialized'
+    $logger = NYPLRubyUtil::NyplLogFormatter.new($stdout, level: ENV['LOG_LEVEL'])
+    $logger.debug 'Initialized'
 end
 
+# rubocop:disable Lint/UnusedMethodArgument
 def handle_event(event:, context:)
-  init
+    init
 
-  begin
-    parse_dates event
-  rescue StandardError => e
-    create_response(500, { error_message: e.message})
-  end
+    begin
+        parse_dates event
+    rescue JSON::ParserError => e
+        create_response(400, { error_message: e.message })
+    rescue StandardError => e
+        create_response(500, { error_message: e.message })
+    end
 end
+# rubocop:enable Lint/UnusedMethodArgument
 
 def parse_dates(event)
-  dates = JSON.parse(event['body'])['dates']
-  parsed_dates = dates.map { |date| [ date, Timetwister.parse(date) ] }.to_h
+    return create_response(400, { message: 'Request must have body' }) unless event['body']
 
-  create_response(200, { dates: parsed_dates })
+    dates = JSON.parse(event['body'])['dates']
+    if !dates || !(dates.is_a? Array) || !(dates.all? { |date| date.is_a? String })
+        return create_response(400, { message: 'Request must have array of dates as strings' })
+    end
+
+    parsed_dates = dates.map { |date| [date, Timetwister.parse(date)] }.to_h
+
+    create_response(200, { dates: parsed_dates })
 end
 
 def create_response(status_code = 200, body = nil)

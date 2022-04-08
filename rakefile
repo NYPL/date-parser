@@ -16,10 +16,3 @@ desc 'Lint the application with the local rubocop settings'
 task :lint do
     sh %( rubocop )
 end
-
-desc 'Update lambda layers, environment_variables, vpc, and events'
-task :set_config do
-    rake_helper = NYPLRubyUtil::DeployHelper.new
-    rake_helper.update_lambda_configuration
-    rake_helper.update_event
-end
