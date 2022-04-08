@@ -13,11 +13,6 @@ variable "environment" {
   }
 }
 
-variable "vpc_config" {
-  type = map
-  description = "The name of the environnment (qa, production)"
-}
-
 # Package the app as a zip:
 data "archive_file" "lambda_zip" {
   type        = "zip"
@@ -41,7 +36,7 @@ resource "aws_lambda_function" "lambda_instance" {
   description   = "Lambda wrapper for Timetwister"
   function_name = "DateParser-${var.environment}"
   handler       = "app.handle_event"
-  memory_size   = 512
+  memory_size   = 128
   role          = "arn:aws:iam::946183545209:role/lambda-full-access"
   runtime       = "ruby2.7"
   timeout       = 300
@@ -52,11 +47,6 @@ resource "aws_lambda_function" "lambda_instance" {
 
   # Trigger pulling code from S3 when the zip has changed:
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
-
-  vpc_config {
-    subnet_ids         = var.vpc_config.subnet_ids
-    security_group_ids = var.vpc_config.security_group_ids
-  }
 
   # Load ENV vars from ./config/{environment}.env
   environment {

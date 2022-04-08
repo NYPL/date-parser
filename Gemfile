@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'timetwister'
 gem 'nypl_ruby_util'
+gem 'timetwister'
 
 group :test do
-  gem 'rspec'
+    gem 'rspec'
+    gem 'rubocop', require: false
 end
