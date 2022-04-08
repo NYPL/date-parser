@@ -15,7 +15,6 @@ jobs:
   include:
     - stage: test
       script:
-        - rake lint
         - rake test
     - stage: deploy qa
       if: type IN (push) and branch = qa
