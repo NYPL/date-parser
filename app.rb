@@ -9,15 +9,24 @@ end
 def handle_event(event:, context:)
     init
 
+
     begin
         parse_dates event
+    rescue JSON::ParserError => e
+      create_response(400, { error_message: e.message })
     rescue StandardError => e
         create_response(500, { error_message: e.message })
     end
 end
 
 def parse_dates(event)
+    return create_response(400, { message: 'Request must have body' }) if !event['body']
+
     dates = JSON.parse(event['body'])['dates']
+    if !dates || !(dates.is_a? Array) || !(dates.all? {|date| date.is_a? String })
+      return create_response(400, { message: 'Request must have array of dates as strings' })
+    end
+
     parsed_dates = dates.map { |date| [date, Timetwister.parse(date)] }.to_h
 
     create_response(200, { dates: parsed_dates })
