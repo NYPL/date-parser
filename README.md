@@ -31,4 +31,4 @@ where `dates` can be any array of date strings.
 
 ## Testing
 
-Invoke tests with `bundle exec rspec`
+Invoke tests with `rake test`
