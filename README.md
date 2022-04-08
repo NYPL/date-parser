@@ -26,7 +26,7 @@ where `dates` can be any array of date strings.
 
 1. Cut PRs from `main`
 2. Merge into `main`
-3. Merge into `qa` and `production` to deploy (TODO)
+3. Merge into `qa` and `production` to deploy
 
 
 ## Testing
