@@ -69,7 +69,7 @@ GEM
     rubocop-ast (1.16.0)
       parser (>= 3.1.1.0)
     ruby-progressbar (1.11.0)
-    timetwister (0.3.0)
+    timetwister (0.3.1)
     unicode-display_width (2.1.0)
 
 PLATFORMS
