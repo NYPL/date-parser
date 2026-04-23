@@ -1,3 +1,7 @@
+# Deprecated
+
+We may choose to un-archive this in the future, but we're deprecating this for now to reduce our maintenance burden as it's not currently in play.
+
 # DateParser
 
 A simple lambda wrapping [Timetwister](https://github.com/alexduryee/timetwister). This makes Timetwister's advanced date-parsing available to all library services.
